@@ -6,6 +6,79 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_favoriteNumber",
+						"type": "uint256"
+					}
+				],
+				"name": "addperson",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "favoriteNumber",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "people",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "favoriteNumber",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "person",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "favoriteNumber",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "retrieve",
 				"outputs": [
@@ -60,11 +133,11 @@
 	},
 	"sources": {
 		"contracts/SIMPLESTORAGE.sol": {
-			"keccak256": "0x89722fdb8bd2b169f0d8f3b45589161e8652d80b3079519c3839d6fce84ad317",
+			"keccak256": "0x173b611f5b0d8ecb8bb1627fb1d03ee6a64762658a7c0213a91081bc7c89ab5d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://69bcb6f0ee4d6ca1bf49054b77406704d660252b5fd193765bd3c76a83a7d82f",
-				"dweb:/ipfs/QmUx36d4uJfkfJh8rtJFyRbgmCWE8YJocnJgiTdFqGZv7M"
+				"bzz-raw://7e2bb66a52695f6425c2d19814235ac88dc040d6c82e1bdd80d775480dbeb1eb",
+				"dweb:/ipfs/QmWfoqRHHGKWu5k1hQAnWUf4WhAdLncBMsVjFKhKXtjoXF"
 			]
 		}
 	},
