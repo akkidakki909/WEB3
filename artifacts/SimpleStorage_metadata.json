@@ -6,6 +6,19 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"name": "retrieve",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "int256",
@@ -47,11 +60,11 @@
 	},
 	"sources": {
 		"contracts/SIMPLESTORAGE.sol": {
-			"keccak256": "0x23c2801e42c7c5384775afc11552d2b5e67f61205a3dea289da726a6683fcd7e",
+			"keccak256": "0x89722fdb8bd2b169f0d8f3b45589161e8652d80b3079519c3839d6fce84ad317",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0bc562da1e2ab69d74791ad313da91d748592d7f9feec490bb577ac8292548e1",
-				"dweb:/ipfs/QmWHDwedd97LkT1CZBmB7ygdnEL2HifB9Tbz6nFfb2ELx5"
+				"bzz-raw://69bcb6f0ee4d6ca1bf49054b77406704d660252b5fd193765bd3c76a83a7d82f",
+				"dweb:/ipfs/QmUx36d4uJfkfJh8rtJFyRbgmCWE8YJocnJgiTdFqGZv7M"
 			]
 		}
 	},

@@ -9,10 +9,20 @@ contract SimpleStorage//contract is a keyword in solidity and tells the compiler
     int fanum;
     string favnumit="five";
     address akkiadd = 0x1066618d0973e44EfD2Fe5114fD18b64c6420AbB;
+    //the scope of these variables is global because they are outside the function
+    //scope of variables inside function is local
     //Functions
     //"Functions" or "methods" execute a subset of code when called
     function store(int _fanum) public//here we created a function called store , int_favnum is the variable that gets passed into this fn, public means the fn is public
        {fanum= _fanum;
-       
+
        }
+//4 types of visibility specifiers for functions
+//public,private,external,internal
+function retrieve() public view returns(uint){
+    return favnum;
+}// view and pure functions,when called alone ,don't spend gas
+//purpose of view:Declares a function that reads state variables from the blockchain but does not modify them.
+//purpose of pure: Declares a function that doesn't read from or write to the blockchain's state.
+
 }
