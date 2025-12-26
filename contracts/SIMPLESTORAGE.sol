@@ -21,8 +21,20 @@ contract SimpleStorage//contract is a keyword in solidity and tells the compiler
 //public,private,external,internal
 function retrieve() public view returns(uint){
     return favnum;
-}// view and pure functions,when called alone ,don't spend gas
+ }// view and pure functions,when called alone ,don't spend gas
 //purpose of view:Declares a function that reads state variables from the blockchain but does not modify them.
 //purpose of pure: Declares a function that doesn't read from or write to the blockchain's state.
-
+//if a gas calling function calls a view or pure function-only then will it cost gas
+uint256 public favoriteNumber;//type of object,visibility,variable name
+People public person=People({favoriteNumber:2,name:"Patrick"});
+struct People{ //using structure to store multiple fields of data for many people    uint256 favoriteNumber;
+    uint256 favoriteNumber;
+    string name;
+ }
+//an array stores a list of data objects
+People[] public people;//type of object(here array),visibility,variable name
+function addperson(string memory _name,uint256 _favoriteNumber) public{
+    People memory newPerson = People({favoriteNumber: _favoriteNumber,name: _name});
+    people.push(newPerson);
+ }
 }
