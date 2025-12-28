@@ -1,0 +1,79 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract JointFund {
+    address public firstOwner;
+    address public secondOwner;
+    uint256 public releaseTime;
+    bool public isFundReleased;
+
+    
+    struct WithdrawalConsent {
+        bool firstOwnerConsent;
+        bool secondOwnerConsent;
+    }
+
+    WithdrawalConsent public withdrawalConsent;
+
+ 
+    mapping(address => bool) public isJointOwner;
+
+   
+    constructor(address _secondOwner, uint256 _releaseTime) {
+        require(_secondOwner != msg.sender, "Owners must be different");
+        require(_releaseTime > block.timestamp, "Release time must be in future");
+
+        firstOwner = msg.sender;
+        secondOwner = _secondOwner;
+        releaseTime = _releaseTime;
+
+        isJointOwner[firstOwner] = true;
+        isJointOwner[secondOwner] = true;
+    }
+
+ 
+    receive() external payable {
+        require(!isFundReleased, "Fund already released");
+    }
+
+    
+    function giveWithdrawalConsent() public {
+        require(isJointOwner[msg.sender], "Not a joint owner");
+        require(!isFundReleased, "Fund already released");
+
+        if (msg.sender == firstOwner) {
+            withdrawalConsent.firstOwnerConsent = true;
+        } else if (msg.sender == secondOwner) {
+            withdrawalConsent.secondOwnerConsent = true;
+        }
+    }
+
+   
+    function releaseFunds() public {
+    require(isJointOwner[msg.sender], "Not a joint owner");
+    require(block.timestamp >= releaseTime, "Fund is still locked");
+    require(
+        withdrawalConsent.firstOwnerConsent &&
+        withdrawalConsent.secondOwnerConsent,
+        "Both owners must agree"
+    );
+    require(!isFundReleased, "Fund already released");
+
+    isFundReleased = true;
+
+    (bool success, ) = firstOwner.call{value: address(this).balance}("");
+    require(success, "Transfer failed");
+}
+
+
+    function getFundBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
+    function getRemainingLockTime() public view returns (uint256) {
+        if (block.timestamp >= releaseTime) {
+            return 0;
+        }
+        return releaseTime - block.timestamp;
+    }
+}
