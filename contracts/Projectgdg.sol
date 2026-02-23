@@ -18,6 +18,11 @@ contract JointFund {
  
     mapping(address => bool) public isJointOwner;
 
+    
+    event FundsDeposited(address indexed sender, uint256 amount);
+    event ConsentGiven(address indexed owner);
+    event FundsReleased(address indexed to, uint256 amount);
+
    
     constructor(address _secondOwner, uint256 _releaseTime) {
         require(_secondOwner != msg.sender, "Owners must be different");
