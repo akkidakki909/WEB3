@@ -18,10 +18,15 @@ contract JointFund {
  
     mapping(address => bool) public isJointOwner;
 
-    
+
     event FundsDeposited(address indexed sender, uint256 amount);
     event ConsentGiven(address indexed owner);
     event FundsReleased(address indexed to, uint256 amount);
+
+    modifier onlyJointOwner(){
+        require(isJointOwner[msg.sender],"Not a Joint Owner");
+        _;
+    }
 
    
     constructor(address _secondOwner, uint256 _releaseTime) {
