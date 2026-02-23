@@ -55,10 +55,13 @@ contract JointFund {
         require(!isFundReleased, "Fund already released");
 
         if (msg.sender == firstOwner) {
+            require(!withdrawalConsent.firstOwnerConsent, "Already approved");
             withdrawalConsent.firstOwnerConsent = true;
         } else if (msg.sender == secondOwner) {
+            require(!withdrawalConsent.secondOwnerConsent, "Already approved");
             withdrawalConsent.secondOwnerConsent = true;
         }
+        emit ConsentGiven(msg.sender);
     }
 
    
