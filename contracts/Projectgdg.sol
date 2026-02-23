@@ -75,10 +75,17 @@ contract JointFund {
     );
     require(!isFundReleased, "Fund already released");
 
+    uint256 balance = address(this).balance;
+    require(balance > 0, "No funds");
+
+
+
     isFundReleased = true;
 
     (bool success, ) = firstOwner.call{value: address(this).balance}("");
     require(success, "Transfer failed");
+
+    emit FundsReleased(firstOwner, balance);
 }
 
 
@@ -91,5 +98,47 @@ contract JointFund {
             return 0;
         }
         return releaseTime - block.timestamp;
+    }
+
+     
+    function getTimeBreakdown()
+        public
+        view
+        returns (
+            uint256 daysRemaining,
+            uint256 hoursRemaining,
+            uint256 minutesRemaining,
+            uint256 secondsRemaining
+        )
+    {
+        uint256 remaining = getRemainingLockTime();
+
+        daysRemaining = remaining / 86400;
+        remaining = remaining % 86400;
+
+        hoursRemaining = remaining / 3600;
+        remaining = remaining % 3600;
+
+        minutesRemaining = remaining / 60;
+        secondsRemaining = remaining % 60;
+    }
+
+    
+    function getVaultStatus()
+        public
+        view
+        returns (
+            uint256 balance,
+            bool locked,
+            bool firstApproved,
+            bool secondApproved,
+            bool released
+        )
+    {
+        balance = address(this).balance;
+        locked = block.timestamp < releaseTime;
+        firstApproved = withdrawalConsent.firstOwnerConsent;
+        secondApproved = withdrawalConsent.secondOwnerConsent;
+        released = isFundReleased;
     }
 }
