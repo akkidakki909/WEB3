@@ -44,6 +44,9 @@ contract JointFund {
  
     receive() external payable {
         require(!isFundReleased, "Fund already released");
+        require(!isFundReleased,"Already released");
+
+        emit FundsDeposited(msg.sender,msg.value);
     }
 
     
